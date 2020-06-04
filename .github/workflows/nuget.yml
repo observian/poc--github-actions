@@ -17,5 +17,5 @@ jobs:
 
       - name: publish nuget
         run: |
-          dotnet pack -c Release -o fun.nupkg ./WebApiModels/WebApiModels.csproj
-          dotnet nuget push fun.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/observian/index.json 
+          dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
+          dotnet nuget push *.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/observian/index.json 
