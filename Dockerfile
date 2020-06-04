@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
 
 COPY ./github-actions-webapi/github-actions-webapi.csproj ./github-actions-webapi/github-actions-webapi.csproj
+COPY ./WebApiModels/WebApiModels.csproj ./WebApiModels/WebApiModels.csproj
 
 COPY github-actions-poc.sln .
 RUN dotnet restore github-actions-poc.sln
