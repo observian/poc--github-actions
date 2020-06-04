@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageId>WebApiModels</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>John Q Developer</Authors>
+        <Company>your-company</Company>
+        <PackageDescription>This package adds an Octocat!</PackageDescription>
+        <RepositoryUrl>https://github.com/observian/poc--github-actions</RepositoryUrl>
+    </PropertyGroup>
+</Project>
