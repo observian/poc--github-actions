@@ -17,5 +17,5 @@ jobs:
           sudo apt-get install -y nuget
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
           
-          nuget push *.nupkg -apiKey ${{ secrets.GITHUB_TOKEN }} -source https://nuget.pkg.github.com/observian/poc--github-actions
+          nuget push *.nupkg -apiKey ${{ secrets.GITHUB_TOKEN }} -source https://nuget.pkg.github.com/observian/poc--github-actions/
           

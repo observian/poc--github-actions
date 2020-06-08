@@ -4,8 +4,8 @@
         <PackageId>WebApiModels</PackageId>
         <Version>1.0.0</Version>
         <Authors>John Q Developer</Authors>
-        <Company>your-company</Company>
+        <Company>Observian</Company>
         <PackageDescription>This package adds stuff</PackageDescription>
-        <RepositoryUrl>https://github.com/observian/poc--github-actions</RepositoryUrl>
+        <RepositoryUrl>https://github.com/observian/poc--github-actions/</RepositoryUrl>
     </PropertyGroup>
 </Project>
