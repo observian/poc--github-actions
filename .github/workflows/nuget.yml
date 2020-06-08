@@ -14,8 +14,6 @@ jobs:
       - name: publish nuget
         run: |
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
-          echo "${{ secrets.NUGET_CONFIG }}" > nuget.config
-          
-          cat nuget.config
-          
+          sed -i 's/USERNAME/${{ github.actor }}/g; s/APIKEY/${{ secrets.GITHUB_TOKEN }}/g' nuget.config
+          dotnet nuget push *.nupkg -s "github"
           
