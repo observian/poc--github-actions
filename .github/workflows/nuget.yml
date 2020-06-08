@@ -16,7 +16,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y nuget
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
-          echo ${{ secrets.NUGET_CONFIG }} > nuget.config
+          echo "${{ secrets.NUGET_CONFIG }}" > nuget.config
           sed -i 's/USERNAME/${{ github.actor }}/g; s/APIKEY/${{ secrets.GITHUB_TOKEN }}/g' nuget.config
           dotnet nuget push *.nupkg -s "github"
           
