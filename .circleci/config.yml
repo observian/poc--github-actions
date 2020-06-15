@@ -1,14 +1,25 @@
+orbs:
+  gcp-gcr: circleci/gcp-gcr@0.7.1
 version: 2.1
-jobs:
-  push nuget package:
-    docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
-    steps:
-      - checkout
-      - run: |
-          version=`date +"%Y.%m%d.%H%M"`
-          sed -i "s/1.0.0/${version}/g" ./WebApiModels/WebApiModels.csproj
-          sed -i 's/USERNAME/${MY_GET_USERNAME}/g; s/APIKEY/${MY_GET_TOKEN}/g' nuget.config
-          dotnet restore --configfile ./nuget.config 
-          dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
-          dotnet nuget push *.nupkg -s "myget" -k $MY_GET_TOKEN
+  jobs:
+    push-nuget-package:
+      docker:
+        - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      steps:
+        - checkout
+        - run: |
+            version=`date +"%Y.%m%d.%H%M"`
+            sed -i "s/1.0.0/${version}/g" ./WebApiModels/WebApiModels.csproj
+            sed -i 's/USERNAME/${MY_GET_USERNAME}/g; s/APIKEY/${MY_GET_TOKEN}/g' nuget.config
+            dotnet restore --configfile ./nuget.config 
+            dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
+            dotnet nuget push *.nupkg -s "myget" -k $MY_GET_TOKEN
+workflows:
+  build_things:
+    jobs:
+      - push-nuget-package:
+      - gcp-gcr/build-and-push-image:
+          context: myContext
+          image: weather-forecast
+          registry-url: us.gcr.io
+          tag: $CIRCLE_BUILD_NUM
