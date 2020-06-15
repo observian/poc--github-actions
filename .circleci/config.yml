@@ -22,7 +22,6 @@ workflows:
     jobs:
       - push-nuget-package
       - gcp-gcr/build-and-push-image:
-          context: myContext
           image: weather-forecast
           registry-url: us.gcr.io
           tag: $CIRCLE_BUILD_NUM
