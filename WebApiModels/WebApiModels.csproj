@@ -6,6 +6,6 @@
         <Authors>John Q Developer</Authors>
         <Company>Observian</Company>
         <PackageDescription>This package adds stuff</PackageDescription>
-        <RepositoryUrl>https://github.com/observian/poc--github-actions</RepositoryUrl>
+        <RepositoryUrl>https://www.myget.org/F/impossible-telegram/api/v2/package</RepositoryUrl>
     </PropertyGroup>
 </Project>
