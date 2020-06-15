@@ -14,12 +14,12 @@ jobs:
           dotnet restore --configfile ./nuget.config 
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
           dotnet nuget push *.nupkg -s "myget" -k $MY_GET_TOKEN
-workflows:
-  build_things:
-    jobs:
-      - push-nuget-package:
-      - gcp-gcr/build-and-push-image:
-          context: myContext
-          image: weather-forecast
-          registry-url: us.gcr.io
-          tag: $CIRCLE_BUILD_NUM
+#workflows:
+#  build_things:
+#    jobs:
+#      - push-nuget-package:
+#      - gcp-gcr/build-and-push-image:
+#          context: myContext
+#          image: weather-forecast
+#          registry-url: us.gcr.io
+#          tag: $CIRCLE_BUILD_NUM
