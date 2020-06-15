@@ -9,4 +9,8 @@
     
      steps:
        - checkout
-       - run: dotnet build
+       - run: |
+           version=`date +"%Y.%m%d.%H%M"`
+           sed -i "s/1.0.0/${version}/g" ./WebApiModels/WebApiModels.csproj
+           sed -i 's/USERNAME/${MY_GET_USERNAME}/g; s/APIKEY/${MY_GET_TOKEN}/g' nuget.config
+           dotnet build
