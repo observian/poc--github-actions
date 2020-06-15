@@ -1,6 +1,8 @@
+version: 2.1
+
 orbs:
   gcp-gcr: circleci/gcp-gcr@0.7.1
-version: 2.1
+
 jobs:
   push-nuget-package:
     docker:
@@ -15,9 +17,10 @@ jobs:
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
           dotnet nuget push *.nupkg -s "myget" -k $MY_GET_TOKEN
 workflows:
+  version: 2.1
   build_things:
     jobs:
-      - push-nuget-package:
+      - push-nuget-package
       - gcp-gcr/build-and-push-image:
           context: myContext
           image: weather-forecast
