@@ -10,7 +10,7 @@ namespace github_actions_webapi.Controllers
 		[HttpGet]
 		public IActionResult Get()
 		{
-			return Ok($"{DateTime.UtcNow:hh:mm:ss}");
+			return Ok($"UTC time is {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss}");
 		}
 	}
 }
