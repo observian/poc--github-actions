@@ -5,5 +5,9 @@
     <RootNamespace>github_actions_webapi</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.3.126.14" />
+  </ItemGroup>
+
 
 </Project>
