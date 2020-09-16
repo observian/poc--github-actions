@@ -18,14 +18,6 @@ jobs:
           sed -i "s/1.0.0/${version}/g" ./WebApiModels/WebApiModels.csproj
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
 
-      - name: Nuget Source
+      - name: Publish Nuget
         run: |
-          dotnet nuget add source https://nuget.pkg.github.com/observian/index.json -n github -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
-
-      # - name: Publish Nuget
-      #   run: |
-      #     dotnet nuget push *.nupkg -s "github"
-
-      - name: Push to GitHub
-        run: |
-          dotnet nuget push *.nupkg -s "github" -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate --no-symbols true
+          dotnet nuget push *.nupkg -s "github" --skip-duplicate --no-symbols true
