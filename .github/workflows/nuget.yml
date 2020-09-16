@@ -1,22 +1,27 @@
 name: Publish Nuget package
 on: [push]
-
 jobs:
   build:
-    name: 
     runs-on: ubuntu-latest
     steps:
-      
-      - name: Check out the repo
+      - name: Checkout Repository
         uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
 
-      - name: publish nuget
+      - name: Setup .NET Core Version 3.1.301
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+
+      - name: Dotnet Pack
         run: |
           version=`date +"%Y.%m%d.%H%M"`
           sed -i "s/1.0.0/${version}/g" ./WebApiModels/WebApiModels.csproj
           dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
-          
-          sed -i 's/USERNAME/${{ github.actor }}/g; s/APIKEY/${{ secrets.GITHUB_TOKEN }}/g' nuget.config
+
+      - name: Nuget Source
+        run: |
+          dotnet nuget add source https://nuget.pkg.github.com/observian/index.json -n github -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+
+      - name: Publish Nuget
+        run: |
           dotnet nuget push *.nupkg -s "github"
-          
