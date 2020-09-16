@@ -20,4 +20,5 @@ jobs:
 
       - name: Publish Nuget
         run: |
-          dotnet nuget push *.nupkg -s "github" -k ${{ secrets.TRYING_MY_KEY }} --skip-duplicate --no-symbols true
+          sed -i 's/USERNAME/${{ github.actor }}/g; s/APIKEY/${{ secrets.GITHUB_TOKEN }}/g' nuget.config
+          dotnet nuget push *.nupkg -s "github" --skip-duplicate --no-symbols true
