@@ -20,4 +20,4 @@ jobs:
 
       - name: Publish Nuget
         run: |
-          dotnet nuget push *.nupkg -s "github" --skip-duplicate --no-symbols true
+          dotnet nuget push *.nupkg -s "github" -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate --no-symbols true
