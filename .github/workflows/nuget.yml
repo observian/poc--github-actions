@@ -7,18 +7,27 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup .NET Core Version 3.1.301
+      - name: Setup .NET Core Version 3.1
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.301
+
+      - name: Build Project
+        run: |
+          dotnet build -c Release
 
       - name: Dotnet Pack
         run: |
           version=`date +"%Y.%m%d.%H%M"`
           sed -i "s/1.0.0/${version}/g" ./WebApiModels/WebApiModels.csproj
-          dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj
+          dotnet pack -c Release -o . ./WebApiModels/WebApiModels.csproj  
 
-      - name: Publish Nuget
+      - name: Package Source
         run: |
-          sed -i 's/USERNAME/${{ github.actor }}/g; s/APIKEY/${{ secrets.GITHUB_TOKEN }}/g' nuget.config
-          dotnet nuget push *.nupkg -s "github" --skip-duplicate --no-symbols true
+          dotnet nuget add source ${{ secrets.PACKAGE_SOURCE }} -n github -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+
+      - name: Push to GitHub
+        run: |
+          dotnet nuget push *.nupkg -s "github" -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate --no-symbols true
+          
+          
